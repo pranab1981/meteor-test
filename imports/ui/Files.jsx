@@ -117,7 +117,14 @@ export const Files = ({ currentUser }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const isLoadingFiles = useSubscribe("files");
-  const files = useFind(() => FilesCollection.find());
+  const files = useFind(() =>
+    FilesCollection.find(
+      {},
+      {
+        sort: { createdAt: -1 },
+      }
+    )
+  );
 
   if (isLoadingFiles()) {
     return <Spin size="large" />;
