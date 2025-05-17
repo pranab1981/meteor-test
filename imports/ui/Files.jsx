@@ -63,7 +63,7 @@ const FileCard = ({ file }) => {
         <Text type="secondary">{file.metadata.description}</Text>
         <br />
         <Text type="secondary" style={{ fontSize: '12px' }}>
-          Created: {file.createdAt.toLocaleDateString()}
+          Created: {file.createdAt?.toLocaleDateString()}
         </Text>
       </div>
     </Card>
