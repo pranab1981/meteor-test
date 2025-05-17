@@ -1,5 +1,13 @@
 # Implementing Role-Based Authentication in a Meteor App
 
+## 🎥 Walkthrough
+I've created a video walkthrough demonstrating how I implemented the role-based authentication system for this project. The walkthrough covers:
+- My process for exploring the codebase
+- The key technical challenges I encountered
+- A demonstration of the working role-based permissions system
+
+**Watch the walkthrough here:** [YouTube Video Link](https://youtu.be/Ubwu7I-sVfA)
+
 ## Exploration and Initial Assessment
 
 When I first began exploring the FileNest Meteor application, I needed to understand the existing structure and functionality before making changes. My exploration process involved:
