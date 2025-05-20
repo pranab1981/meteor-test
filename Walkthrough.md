@@ -1,8 +1,15 @@
-import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/roles';
-import { createUser } from '/imports/api/users';
-import { FilesCollection, seedFiles } from '/imports/api/files';
+# Walkthrough
 
+Hello, I started off by exploring the `/tests` and `/server` directories, they were very simple. Then I proceeded to fire off the application to have a gist of what it looks like whilst also exploring the client side code.
+
+As I was firing the application, I saw it installing 3.2 and I know roles packages was added directly to the core recently so I went ahead and installed it along with `accounts-password` package in order to be able to test out the users and roles features.
+
+That's when things went south a bit since there was a pre-defined users collection and `accounts-password` creates its own. In order to avoid such conflicts, I removed the pre-defined one and relied on Meteor.users collection.
+
+
+The rest was pretty straight forward, I ensured the roles were created and users were seeded with roles. 
+
+```js
 
 async function seedUsers() {
   const dummyUsers = [
@@ -27,12 +34,13 @@ Meteor.startup(async () => {
     await seedUsers();
   }
 
-  // Seed files if the collection is empty
-  if (await FilesCollection.find().countAsync() === 0) {
-    await seedFiles();
-  }
+```
 
-  // Publish the Users collection to all clients
+Then I went ahead and added some restrictions to publications in order to ensure a secure flow. Where only the admin user has full access to the users and files collections.
+
+```js
+
+// Publish the Users collection to all clients
   Meteor.publish("users", async function () {
     const isAdmin = await Roles.userIsInRoleAsync(this.userId, 'admin')
     if (this.userId && isAdmin) {
@@ -61,4 +69,6 @@ Meteor.startup(async () => {
     }
   });
 
-});
+ ```
+
+I used very little AI since the application is pretty small and I've a prior knowledge of Meteor and Roles package.

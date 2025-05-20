@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFind, useSubscribe } from 'meteor/react-meteor-data';
-import { UsersCollection } from '../api/users';
+import { Meteor } from 'meteor/meteor';
 import { Collapse, Card, Typography, Spin } from 'antd';
 
 const { Panel } = Collapse;
@@ -8,7 +8,7 @@ const { Text, Title } = Typography;
 
 export const Users = () => {
   const isLoading = useSubscribe('users');
-  const users = useFind(() => UsersCollection.find());
+  const users = useFind(() => Meteor.users.find());
 
   if (isLoading()) {
     return <Spin size="large" />;
@@ -25,7 +25,7 @@ export const Users = () => {
           >
             <Card type="inner">
               <p><Text strong>Email:</Text> {user.email}</p>
-              <p><Text strong>Created At:</Text> {user.createdAt.toLocaleDateString()}</p>
+              <p><Text strong>Created At:</Text> {user.createdAt?.toLocaleDateString()}</p>
               <p>
                 <Text strong>Color:</Text>{' '}
                 <span 

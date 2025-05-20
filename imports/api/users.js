@@ -2,7 +2,7 @@ import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 
 // Define the Users collection
-export const UsersCollection = new Mongo.Collection('users');
+// export const UsersCollection = new Mongo.Collection('users');
 
 // Define the schema for a user
 export const UserSchema = {
@@ -15,15 +15,14 @@ export const UserSchema = {
 };
 
 // Helper function to create a new user
-export const createUser = async ({ email, name, color }) => {
-  const user = {
+export const createUser = async ({ email, name, password, color }) => {
+
+  return Accounts.createUser({
     email,
-    createdAt: new Date(),
+    password,
     profile: {
       name,
       color
     }
-  };
-  
-  return await UsersCollection.insertAsync(user);
+  })
 }; 
