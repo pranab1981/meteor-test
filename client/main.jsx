@@ -3,9 +3,19 @@ import { createRoot } from 'react-dom/client';
 import { Meteor } from 'meteor/meteor';
 import { App } from '/imports/ui/App';
 import 'antd/dist/reset.css';  // Import Ant Design CSS
+import { BrowserRouter } from 'react-router-dom';
+import { RoleProvider } from '/imports/context/RoleContext.jsx';
 
 Meteor.startup(() => {
   const container = document.getElementById('react-target');
   const root = createRoot(container);
-  root.render(<App />);
+  
+  root.render(
+    <BrowserRouter>
+      <RoleProvider>
+        <App />
+      </RoleProvider>
+    </BrowserRouter>
+  );
+
 });
